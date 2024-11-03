@@ -12,6 +12,8 @@ function App() {
     });
   }, []);
 
+  console.log("activities:", activities);
+
   return (
     <div>
       <Header as="h2" icon="users" content="Reactivities" />
