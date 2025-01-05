@@ -8,7 +8,7 @@ export interface IProfile {
   // following: boolean;
   // followersCount: number;
   // followingCount: number;
-  // photos: Photo[];
+  photos?: Photo[];
 }
 
 export class Profile implements IProfile {
@@ -16,10 +16,18 @@ export class Profile implements IProfile {
     this.username = user.userName;
     this.displayName = user.displayName;
     this.image = user.image;
+    this.photos = user.photos;
   }
 
   username: string;
   displayName: string;
   image?: string;
   bio?: string;
+  photos?: Photo[];
+}
+
+export interface Photo {
+  id: string;
+  url: string;
+  isMain: boolean;
 }
