@@ -11,7 +11,7 @@ import {
 import { Photo, Profile } from "../../app/models/profile";
 import { useStore } from "../../app/stores/store";
 import { SyntheticEvent, useState } from "react";
-import PhotoUploadWidget from "../../app/common/imageUpload/photoUploadWidget";
+import PhotoUploadWidget from "../../app/common/imageUpload/PhotoUploadWidget";
 
 interface Props {
   profile: Profile;
@@ -67,7 +67,7 @@ export default observer(function ProfilePhotos({ profile }: Props) {
           {isCurrentUser && (
             <Button
               floated="right"
-              basic
+              primary={!addPhotoMode}
               content={addPhotoMode ? "Cancel" : "Add Photo"}
               onClick={() => setAddPhotoMode(!addPhotoMode)}
             />
