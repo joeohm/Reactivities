@@ -25,6 +25,10 @@ export class Profile implements IProfile {
   bio?: string;
   photos?: Photo[];
 }
+export class ProfileFormValues {
+  displayName: string = "";
+  bio: string | undefined = "";
+}
 
 export interface Photo {
   id: string;

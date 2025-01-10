@@ -99,4 +99,22 @@ export default class ProfileStore {
       });
     }
   };
+
+  updateProfile = async (profile: Partial<Profile>) => {
+    this.loading = true;
+    try {
+      await agent.Profiles.updateProfile(profile);
+      runInAction(() => {
+        if (this.profile) {
+          this.profile = { ...this.profile, ...profile };
+          this.loading = false;
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
 }

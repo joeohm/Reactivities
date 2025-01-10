@@ -1,4 +1,4 @@
-import { Button, Card, Icon, Image } from "semantic-ui-react";
+import { Card, Icon, Image } from "semantic-ui-react";
 import { Profile } from "../../app/models/profile";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
@@ -14,8 +14,9 @@ export default observer(function ProfileCard({ profile }: Props) {
       <Card.Content>
         <Card.Header>{profile.displayName}</Card.Header>
         <Card.Description>
-          {/* {profile.bio} */}
-          Bio goes here
+          {profile.bio && profile.bio.length > 40
+            ? profile.bio.slice(0, 40) + "..."
+            : profile.bio}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

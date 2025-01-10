@@ -49,4 +49,17 @@ export default class UserStore {
       console.error(error);
     }
   };
+
+  editProfile = async (user: Partial<User>) => {
+    try {
+      await agent.Profiles.updateProfile(user);
+      runInAction(() => {
+        if (this.user) {
+          this.user = { ...this.user, ...user };
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }
