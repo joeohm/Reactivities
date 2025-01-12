@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@microsoft/signalr": "^8.0.7",
     "@types/react-calendar": "^3.9.0",
     "axios": "^1.7.7",
     "formik": "^2.4.6",
