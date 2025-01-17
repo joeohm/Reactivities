@@ -1,10 +1,16 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
-import { Segment, Header, Comment, Button, Loader } from "semantic-ui-react";
+import { useEffect } from "react";
+import {
+  Segment,
+  Header,
+  Comment,
+  Loader,
+  Popup,
+  PopupContent,
+} from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field, FieldProps } from "formik";
-import TextArea from "../form/TextArea";
 import * as Yup from "yup";
 import { format, formatDistanceToNow } from "date-fns";
 
@@ -80,7 +86,18 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
                   {comment.displayName}
                 </Comment.Author>
                 <Comment.Metadata>
-                  <div>{formatDistanceToNow(comment.createdAt)} ago</div>
+                  <div>
+                    <Popup
+                      size="tiny"
+                      trigger={
+                        <div>{formatDistanceToNow(comment.createdAt)} ago</div>
+                      }
+                    >
+                      <PopupContent>
+                        {format(comment.createdAt, "dd MMM yyyy HH:mm")}
+                      </PopupContent>
+                    </Popup>
+                  </div>
                 </Comment.Metadata>
                 <Comment.Text style={{ whiteSpace: "pre-wrap" }}>
                   {comment.body}
