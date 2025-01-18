@@ -5,9 +5,9 @@ export interface IProfile {
   displayName: string;
   image?: string;
   bio?: string;
-  // following: boolean;
-  // followersCount: number;
-  // followingCount: number;
+  followersCount: number;
+  followingCount: number;
+  following: boolean;
   photos?: Photo[];
 }
 
@@ -18,7 +18,9 @@ export class Profile implements IProfile {
     this.image = user.image;
     this.photos = user.photos;
   }
-
+  following: boolean = false;
+  followersCount: number = 0;
+  followingCount: number = 0;
   username: string;
   displayName: string;
   image?: string;
