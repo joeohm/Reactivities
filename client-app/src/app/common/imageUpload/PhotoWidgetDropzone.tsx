@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Header, Icon } from "semantic-ui-react";
 
 interface Props {
-  setFiles: (files: any) => void;
+  setFiles: (files: { preview: string }[]) => void;
 }
 
 export default function PhotoWidgetDropzone({ setFiles }: Props) {
@@ -12,7 +12,7 @@ export default function PhotoWidgetDropzone({ setFiles }: Props) {
     borderColor: "#eee",
     borderRadius: "5px",
     paddingTop: "30px",
-    textAlign: "center" as "center",
+    textAlign: "center" as const,
     height: 200,
   };
 
@@ -25,20 +25,35 @@ export default function PhotoWidgetDropzone({ setFiles }: Props) {
   };
 
   const onDrop = useCallback(
-    (acceptedFiles) => {
+    (acceptedFiles: File[]) => {
       setFiles(
-        acceptedFiles.map((file: any) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
+        acceptedFiles.map((file: File) => ({
+          ...file,
+          preview: URL.createObjectURL(file),
+        }))
       );
     },
     [setFiles]
   );
 
-  const { getRootProps, getInputProps, isDragActive, isDragAccept } =
-    useDropzone({ onDrop });
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+    acceptedFiles,
+  } = useDropzone({ onDrop });
+
+  useEffect(() => {
+    if (acceptedFiles.length > 0) {
+      setFiles(
+        acceptedFiles.map((file: File) => ({
+          ...file,
+          preview: URL.createObjectURL(file),
+        }))
+      );
+    }
+  }, [acceptedFiles, setFiles]);
 
   return (
     <div

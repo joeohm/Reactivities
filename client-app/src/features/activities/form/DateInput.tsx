@@ -10,8 +10,18 @@ export default function DateInput(props: Partial<DatePickerProps>) {
       <DatePicker
         {...field}
         {...props}
-        selected={(field.value && new Date(field.value)) || null}
-        onChange={(value) => helpers.setValue(value)}
+        selected={
+          (field.value && new Date(field.value)) || (null as unknown as Date)
+        }
+        onChange={(date: any) => {
+          helpers.setValue(date);
+          props.onChange?.(
+            date as unknown as Date & [Date | null, Date | null] & Date[]
+          );
+        }}
+        showMonthYearDropdown={true}
+        minDate={new Date()}
+        maxDate={new Date(2026, 12, 0)}
       />
       {meta.touched && meta.error ? (
         <Label basic color="red">

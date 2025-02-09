@@ -15,14 +15,7 @@ interface Props {
   isCurrentUser?: boolean;
 }
 
-export default observer(function ProfileHeader({
-  profile,
-  isCurrentUser,
-}: Props) {
-  //   const {
-  //     profileStore: { updateFollowing, loading },
-  //   } = useStore();
-
+export default observer(function ProfileHeader({ profile }: Props) {
   return (
     <Segment>
       <Grid>
@@ -40,10 +33,6 @@ export default observer(function ProfileHeader({
                   size="large"
                   content={profile?.displayName ?? "displayName"}
                 />
-                {/* <p>
-                  Date Joined:{" "}
-                  <strong>{format(profile.dateJoined!, "dd MMM yyyy")}</strong>
-                </p> */}
               </Item.Content>
             </Item>
           </Item.Group>
@@ -55,24 +44,6 @@ export default observer(function ProfileHeader({
           </Statistic.Group>
           <Divider />
           <FollowButton profile={profile} />
-          {/* {isCurrentUser ? (
-            <Button
-              as={Link}
-              to="/settings"
-              color="teal"
-              fluid
-              basic
-              content="Edit Profile"
-            />
-          ) : (
-            <Button
-              onClick={() => updateFollowing(profile.username)}
-              loading={loading}
-              color={profile.following ? "red" : "green"}
-              fluid
-              content={profile.following ? "Unfollow" : "Follow"}
-            />
-          )} */}
         </Grid.Column>
       </Grid>
     </Segment>
